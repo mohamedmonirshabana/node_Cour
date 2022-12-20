@@ -1,8 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    console.log(req.url, req.method, req.headers);
-    // process.exit();
+    
     res.setHeader('Contet-Type', 'text/html');
     res.write('<html>');
     res.write('<head><title>My first Page </title></head>');
