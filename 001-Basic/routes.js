@@ -34,4 +34,7 @@ const requestHandler = (req, res) => {
     res.end();
 };
 
-module.exports = requestHandler;
+module.exports = {
+    handler: requestHandler,
+    mess: 'print some code'
+};
