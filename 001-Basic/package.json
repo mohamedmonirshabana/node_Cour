@@ -8,5 +8,8 @@
     "start": "node app.js"
   },
   "author": "Mohamed Monir Shabana",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
