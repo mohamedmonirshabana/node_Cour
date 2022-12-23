@@ -1,13 +1,9 @@
-const http = require('http');
-
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use('/', (req, res, next) => {
-    console.log('This always runs!');
-    next();
-});
+app.use(bodyParser.urlencoded());
 
 app.use('/add-product', (req, res, next) => {
 
@@ -21,7 +17,6 @@ app.use('/product', (req, res, next) => {
 });
 
 app.use('/', (req, res, next) => {
-
     res.send('<h1>Hello From Express </h1>');
 });
 
