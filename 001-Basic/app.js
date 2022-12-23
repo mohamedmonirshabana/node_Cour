@@ -4,6 +4,10 @@ const express = require('express');
 
 const app = express();
 
+app.use('/add-product', (req, res, next) => {
+    console.log("In Another The Middlewa!");
+    res.send('<h1>The "Add Product" Page </h1>')
+});
 
 app.use('/', (req, res, next) => {
     console.log("In Another The Middlewa!");
