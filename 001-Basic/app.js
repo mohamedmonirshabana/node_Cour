@@ -11,7 +11,7 @@ const rootDir = require('./util/path');
 const app = express();
 
 app.engine('handlebars', expressHbs());
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 const adminData = require('./routes/admin');
