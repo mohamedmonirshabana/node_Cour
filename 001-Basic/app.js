@@ -10,7 +10,7 @@ const rootDir = require('./util/path');
 
 const app = express();
 
-app.engine('handlebars', expressHbs());
+app.engine('hbs', expressHbs.engine());
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
