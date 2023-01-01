@@ -45,6 +45,7 @@ exports.postCart = (req, res, next) => {
         Cart.addProduct(prodId, product.price);
     });
     console.log(prodId);
+    res.redirect('/');
 
 };
 
