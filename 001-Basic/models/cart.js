@@ -18,7 +18,7 @@ module.exports = class Cart {
         fs.readFile(p, (err, fileContent) => {
             let cart = {
                 products: [],
-                totalQty: 0
+                totalPrice: 0
             };
             if (!err) {
                 cart = JSON.parse(fileContent);
@@ -34,10 +34,7 @@ module.exports = class Cart {
                 };
                 updatedProduct.qty = updatedProduct.qty + 1;
                 cart.products = [...cart.products];
-                cart.products[existingProductIndex];
-                fs.writeFile(p, JSON.stringify(cart), (err) => {
-                    console.log(err);
-                });
+                cart.products[existingProductIndex] = updatedProduct;
             } else {
                 updatedProduct = {
                     id: id,
@@ -46,6 +43,9 @@ module.exports = class Cart {
                 cart.products = [...cart.products, updatedProduct];
             }
             cart.totalPrice = cart.totalPrice + productPrice;
+            fs.writeFile(p, JSON.stringify(cart), (err) => {
+                console.log(err);
+            });
         });
 
     }
