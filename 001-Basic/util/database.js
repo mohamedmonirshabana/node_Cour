@@ -1,15 +1,26 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
+let _db
+
 const mongoConnect = (callback) => {
     MongoClient.connect('mongodb+srv://medo:ASD-123456@cluster0.wongn.mongodb.net/ShopDb')
         .then(client => {
             console.log('Connected');
-            callback(client);
+            _db = client.db();
+            callback();
         }).catch(err => {
             console.log(err);
+            throw err;
         });
 };
 
-module.exports = mongoConnect;
-//mongosh "mongodb+srv://cluster0.wongn.mongodb.net/ShopDB" --apiVersion 1 --username medo
+const getDb = () => {
+    if (_db) {
+        return _db;
+    }
+    throw 'No DB Found';
+};
+
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
