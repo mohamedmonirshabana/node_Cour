@@ -1,9 +1,12 @@
 const path = require('path');
 
-
 const express = require('express');
 
 const bodyParser = require('body-parser');
+
+const errorController = require('./controllers/error');
+
+const mongoConnect = require('./util/database');
 
 const rootDir = require('./util/path');
 
@@ -16,7 +19,6 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-const errorController = require('./controllers/error');
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -30,4 +32,7 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3000);
+mongoConnect((client) => {
+    console.log(client);
+    app.listen(3000);
+})
