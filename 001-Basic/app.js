@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
 
-const mongoConnect = require('./util/database');
+const mongoConnect = require('./util/database').mongoConnect;
 
 const rootDir = require('./util/path');
 
