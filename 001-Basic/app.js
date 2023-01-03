@@ -24,7 +24,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'js')));
 
 app.use('/admin', adminRoutes.routs);
 app.use(shopRoutes);
