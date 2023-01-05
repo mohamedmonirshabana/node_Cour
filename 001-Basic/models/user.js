@@ -17,8 +17,10 @@ class User {
     }
 
     addToCart(product) {
+        console.log('my product', product._id.toString());
         const cartProductIndex = this.cart.items.findIndex(cp => {
-            cp.productId.toString() === product._id.toString();
+            console.log("H ", cp.productId.toString());
+            cp.productId.toString() == product._id.toString();
         });
         console.log('DB insure ', cartProductIndex);
         let newQuantity = 1;
