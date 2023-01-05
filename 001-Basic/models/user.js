@@ -17,35 +17,51 @@ class User {
     }
 
     addToCart(product) {
-        console.log('my product', product._id.toString());
-        const cartProductIndex = this.cart.items.findIndex(cp => {
-            console.log("H ", cp.productId.toString());
-            cp.productId.toString() == product._id.toString();
-        });
-        console.log('DB insure ', cartProductIndex);
-        let newQuantity = 1;
-        const updatedCartItems = [...this.cart.items];
+        if (this.cart.items) {
+            const cartProductIndex = this.cart.items.findIndex(cp => {
+                console.log("H ", cp.productId.toString());
+                cp.productId.toString() == product._id.toString();
+            });
+            let newQuantity = 1;
+            const updatedCartItems = [...this.cart.items];
 
-        if (cartProductIndex >= 0) {
-            newQuantity = this.cat.items[cartProductIndex].quantity + 1;
-            updatedCartItems[cartProductIndex].quantity = newQuantity;
+            if (cartProductIndex >= 0) {
+                newQuantity = this.cat.items[cartProductIndex].quantity + 1;
+                updatedCartItems[cartProductIndex].quantity = newQuantity;
+            } else {
+                updatedCartItems.push({
+                    productId: new ObjectId(product._id),
+                    quantity: newQuantity
+                });
+            }
+            const updatedCart = {
+                items: updatedCartItems
+            };
+            const db = getDb();
+            return db.collection('users').updateOne({
+                _id: this._id
+            }, {
+                $set: {
+                    cart: updatedCart
+                }
+            }).then(result => console.log(result)).catch(err => console.log(err));
         } else {
+            let newQuantity = 1;
+            const updatedCartItems = [...this.cart.items];
             updatedCartItems.push({
                 productId: new ObjectId(product._id),
                 quantity: newQuantity
             });
+            const db = getDb();
+            return db.collection('users').updateOne({
+                _id: this._id
+            }, {
+                $set: {
+                    cart: updatedCart
+                }
+            }).then(result => console.log(result)).catch(err => console.log(err));
         }
-        const updatedCart = {
-            items: updatedCartItems
-        };
-        const db = getDb();
-        return db.collection('users').updateOne({
-            _id: this._id
-        }, {
-            $set: {
-                cart: updatedCart
-            }
-        }).then(result => console.log(result)).catch(err => console.log(err));
+
     }
 
     getCart() {
