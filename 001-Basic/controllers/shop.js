@@ -1,5 +1,4 @@
 const Product = require('../models/product');
-// const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll()
@@ -70,8 +69,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
             res.redirect('/cart');
         })
         .catch(err => console.log(err));
-
-}
+};
 
 exports.postOrder = (req, res, next) => {
     let fetchedCart;

@@ -19,12 +19,7 @@ class Product {
             dbOp = db.collection('products').updateOne({
                 _id: this._id
             }, {
-                $set: {
-                    title: this.title,
-                    price: this.price,
-                    description: this.description,
-                    imageUrl: this.imageUrl
-                }
+                $set: this
             });
         } else {
             dbOp = db.collection('products')
