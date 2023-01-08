@@ -3,10 +3,10 @@ const path = require('path');
 const express = require('express');
 
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const errorController = require('./controllers/error');
 
-const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
 const rootDir = require('./util/path');
@@ -40,6 +40,8 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://medo:ASD-123456@cluster0.wongn.mongodb.net/ShopDB').then(result => {
     app.listen(3000);
-})
+}).catch(err => {
+    console.log(err);
+});
