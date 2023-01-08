@@ -14,8 +14,15 @@ const productSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
     }
 });
+
+module.exports = mongoose.model('Product', productSchema);
+
 /*
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
