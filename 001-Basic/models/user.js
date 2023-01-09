@@ -49,6 +49,9 @@ userSchema.methods.addToCart = function (product) {
     return this.save();
 }
 
+// userSchema.methods.getCart = function (userId) {
+//     const getCartData = this.cart.findById(userId).populate('Product').then()
+// }
 module.exports = mongoose.model('User', userSchema);
 
 
