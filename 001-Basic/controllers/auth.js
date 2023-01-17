@@ -1,7 +1,7 @@
 exports.getLogin = (req, res, next) => {
     let isLoggedIn;
     if (req.get('Cookie') !== undefined) {
-        isLoggedIn = req.get('Cookie').split('=')[1];
+        isLoggedIn = req.get('Cookie').split('=')[1] === 'true';
     } else {
         isLoggedIn = false;
     }
