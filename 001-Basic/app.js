@@ -5,14 +5,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const errorController = require('./controllers/error');
 
 const User = require('./models/user');
 
-// const rootDir = require('./util/path');
+const MONGODB_URI = 'mongodb+srv://medo:ASD-123456@cluster0.wongn.mongodb.net/ShopDB';
 
 const app = express();
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 
 app.set('view engine', 'ejs');
@@ -48,7 +53,7 @@ app.use(authRoutes);
 
 app.use(errorController.get404);
 
-mongoose.connect('mongodb+srv://medo:ASD-123456@cluster0.wongn.mongodb.net/ShopDB')
+mongoose.connect(MONGODB_URI)
     .then(result => {
         User.findOne().then(user => {
             if (!user) {
