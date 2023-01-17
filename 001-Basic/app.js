@@ -30,10 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'my secret',
     resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 10
-    }
+    saveUninitialized: false
 }));
 
 app.use((req, res, next) => {
