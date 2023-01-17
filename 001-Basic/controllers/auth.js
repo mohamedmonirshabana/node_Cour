@@ -14,7 +14,7 @@ exports.getLogin = (req, res, next) => {
 
 
 exports.postLogin = (req, res, next) => {
-    // req.isLoggedIn = true; Expires, Max-Age , Domain
-    res.setHeader('Set-Cookie', 'loggedIn=true; Max-Age=10');
+    // req.isLoggedIn = true; Expires, Max-Age , Domain,Secure
+    res.setHeader('Set-Cookie', 'loggedIn=true; Secure');
     res.redirect('/');
 };
