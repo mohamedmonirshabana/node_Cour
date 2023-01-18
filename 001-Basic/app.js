@@ -37,9 +37,6 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: {
-
-    }
 }));
 
 app.use((req, res, next) => {
