@@ -27,16 +27,44 @@ exports.getSignup = (req, res, next) => {
 
 
 exports.postLogin = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    User.findOne({
+            email: email
+        })
+        .then(user => {
+            if (!user) {
+                return res.redirect('/login');
+            }
+            bcrypt.compare(password, user.password)
+                .then(doMatch => {
+                    if (doMatch) {
+                        req.session.isLoggedIn = true;
+                        req.session.user = user;
+                        return req.session.save(err => {
+                            console.log(err);
+                            res.redirect('/');
+                        });
+                    }
+                    res.redirect('/login');
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.redirect('/login');
+                })
+        })
+        .catch(err => console.log(err));
+
     // req.isLoggedIn = true; Expires, Max-Age , Domain,Secure, HttpOnly
     // res.setHeader('Set-Cookie', 'loggedIn=true; HttpOnly');
-    User.findById('63bbe4312707028454ad44a6').then(user => {
-        req.session.isLoggedIn = true;
-        req.session.user = user;
-        req.session.save(err => {
-            console.log(err);
-            res.redirect('/');
-        });
-    }).catch(err => console.log(err));
+    // User.findById('63bbe4312707028454ad44a6').then(user => {
+    //     req.session.isLoggedIn = true;
+    //     req.session.user = user;
+    //     req.session.save(err => {
+    //         console.log(err);
+    //         res.redirect('/');
+    //     });
+    // }).catch(err => console.log(err));
 };
 
 exports.postSignup = (req, res, next) => {
