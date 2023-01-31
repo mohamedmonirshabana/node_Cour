@@ -12,6 +12,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI = 'mongodb+srv://medo:ASD-123456@cluster0.wongn.mongodb.net/ShopDB';
+const LocalDB_URI = 'mongodb://localhost:27017/LocalDB';
 
 const app = express();
 const store = new MongoDBStore({
