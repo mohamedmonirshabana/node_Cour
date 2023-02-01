@@ -12,16 +12,14 @@ exports.getLogin = (req, res, next) => {
     // console.log(req.session.isLoggedIn);
     res.render('auth/login', {
         path: '/login',
-        pageTitle: 'Login',
-        isAuthenticated: false
+        pageTitle: 'Login'
     });
 };
 
 exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         path: '/signup',
-        pageTitle: 'Signup',
-        isAuthenticated: false
+        pageTitle: 'Signup'
     });
 };
 
