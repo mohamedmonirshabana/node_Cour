@@ -12,7 +12,8 @@ exports.getLogin = (req, res, next) => {
     // console.log(req.session.isLoggedIn);
     res.render('auth/login', {
         path: '/login',
-        pageTitle: 'Login'
+        pageTitle: 'Login',
+        errorMessage: req.flash('error')
     });
 };
 
@@ -32,6 +33,7 @@ exports.postLogin = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
+                req.flash('error', 'Invalid Email or password.');
                 return res.redirect('/login');
             }
             bcrypt.compare(password, user.password)
